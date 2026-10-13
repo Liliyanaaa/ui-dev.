@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liliyana De Zenith | link.creator</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<div class="bg"></div>
+
+<nav class="topnav">
+  <div class="logo">link<b>.creator</b></div>
+  <div class="nav-actions">
+    <button id="btn-login" class="btn-ghost">Masuk</button>
+    <button id="btn-daftar" class="btn-primary">Daftar</button>
+    <button id="btn-admin" class="btn-ghost hidden">⚙️ Edit</button>
+    <span id="user-info" class="hidden"></span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="banner-wrap">
+    <video id="bannerVideo" class="banner-media" autoplay muted loop playsinline style="display:none"></video>
+    <img id="bannerImg" class="banner-media" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80" alt="banner">
+    <div class="banner-overlay-text">link URL video</div>
+  </div>
+
+  <div class="profile-wrap">
+    <div class="avatar-ring">
+      <video id="profileVideo" class="avatar-media" autoplay muted loop playsinline style="display:none"></video>
+      <img id="profileImg" class="avatar-media" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="profile">
+    </div>
+    <h1 id="displayName">Liliyana De Zenith</h1>
+    <p id="displayUsername" class="username">@liliyana.lyna</p>
+    <p id="bioText" class="bio">Selamat datang di link resmi aku ✨</p>
+  </div>
+</header>
+
+<main class="links-container" id="linksContainer"></main>
+
+<section class="video-section">
+  <h2>Video Terbaru</h2>
+  <div class="video-grid" id="videoGrid"></div>
+</section>
+
+<footer class="footer">
+  <p>Dibuat dengan <b>link.creator</b> • <span id="shareUrl"></span> <button id="btn-copy" class="mini-btn">Salin Link</button></p>
+</footer>
+
+<div id="shareToast" class="toast hidden">Link profile kamu: <b id="toastUrl"></b></div>
+
+<div id="authModal" class="modal hidden">
+  <div class="modal-box">
+    <span class="close" data-close="authModal">&times;</span>
+    <h3 id="authTitle">Masuk dengan Gmail</h3>
+    <p class="muted">Pakai akun Google untuk daftar / masuk & klaim username kamu</p>
+    <div id="g_id_button" class="google-btn-wrap"></div>
+    <div class="divider">atau</div>
+    <input id="authEmail" type="email" placeholder="Email Gmail kamu">
+    <input id="authName" type="text" placeholder="Nama tampil (mis: Liliyana De Zenith)">
+    <input id="authUsername" type="text" placeholder="Username (tanpa @) contoh: liliyana.lyna">
+    <button id="btn-auth-manual" class="btn-primary full">Lanjut</button>
+  </div>
+</div>
+
+<div id="adminPanel" class="modal hidden">
+  <div class="modal-box wide">
+    <span class="close" data-close="adminPanel">&times;</span>
+    <h3>⚙️ Edit Profile link.creator</h3>
+    <label>Nama Tampil</label>
+    <input id="inpName" placeholder="Liliyana De Zenith">
+    <label>Username (untuk URL: link.creator/#/@username)</label>
+    <input id="inpUsername" placeholder="liliyana.lyna">
+    <label>Bio</label>
+    <input id="inpBio" placeholder="Bio singkat">
+    <label>URL Banner (video mp4 ATAU foto jpg/png)</label>
+    <input id="inpBanner" placeholder="https://.../banner.mp4 atau banner.jpg">
+    <label>URL Foto/Video Profil</label>
+    <input id="inpProfile" placeholder="https://.../foto.jpg atau profil.mp4">
+    <h4>Link Website (tombol transparan)</h4>
+    <div id="adminLinks"></div>
+    <button id="btn-add-link" class="btn-ghost full">+ Tambah Link</button>
+    <h4>Video Bawah (grid)</h4>
+    <div id="adminVideos"></div>
+    <button id="btn-add-video" class="btn-ghost full">+ Tambah Video</button>
+    <button id="btn-save" class="btn-primary full" style="margin-top:12px">💾 Simpan & Update Link</button>
+    <button id="btn-export" class="btn-ghost full">🔗 Export / Lihat URL Publik</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
