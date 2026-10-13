@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkThree FREE - No Premium</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Poppins;background:#0A0A0A;color:#fff}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#0A84FF;border-radius:10px}</style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row">
+<!-- EDITOR KIRI -->
+<div class="w-full md:w-[58%] p-4 md:p-6 border-b md:border-r border-white/10 overflow-y-auto h-auto md:h-screen">
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="text-xl font-bold">Editor • <span class="text-[#0A84FF]">LinkThree FREE</span></h1>
+    <span class="text-[10px] bg-[#0A84FF] text-black px-2 py-1 rounded-full font-bold">100% LOGIC JALAN</span>
+  </div>
+  <div class="flex gap-2 mb-5 flex-wrap">
+    <button onclick="switchTab('Links')" id="tab-Links" class="tab-btn bg-[#0A84FF] text-black px-4 py-2 rounded-full text-xs font-bold">Links</button>
+    <button onclick="switchTab('Appearance')" id="tab-Appearance" class="tab-btn bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs">Appearance</button>
+    <button onclick="switchTab('Analytics')" id="tab-Analytics" class="tab-btn bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs">Analytics</button>
+    <button onclick="switchTab('Themes')" id="tab-Themes" class="tab-btn bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs">Themes</button>
+    <button onclick="switchTab('Share')" id="tab-Share" class="tab-btn bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs">Share & QR</button>
+  </div>
+
+  <!-- TAB LINKS -->
+  <div id="content-Links" class="tab-content space-y-3">
+    <div class="bg-[#111] p-3 rounded-xl border border-white/10 flex gap-2 flex-col md:flex-row">
+      <input id="newTitle" placeholder="Title ex: Instagram" class="flex-1 bg-black border border-white/10 rounded-lg p-2 text-sm outline-none focus:border-[#0A84FF]">
+      <input id="newUrl" placeholder="https://..." class="flex-1 bg-black border border-white/10 rounded-lg p-2 text-sm outline-none focus:border-[#0A84FF]">
+      <button onclick="addLink()" class="bg-white text-black px-5 py-2 rounded-lg font-bold text-sm">Add</button>
+    </div>
+    <div id="linksList" class="space-y-3"></div>
+  </div>
+
+  <!-- TAB APPEARANCE -->
+  <div id="content-Appearance" class="tab-content hidden space-y-3">
+    <div class="bg-[#111] p-4 rounded-xl border border-white/10 space-y-3">
+      <input id="pName" placeholder="Nama" class="w-full bg-black border border-white/10 rounded-lg p-2 text-sm" oninput="updateProfile()">
+      <input id="pBio" placeholder="Bio ex: @alex • Designer" class="w-full bg-black border border-white/10 rounded-lg p-2 text-sm" oninput="updateProfile()">
+      <input id="pAvatar" placeholder="Link Foto Profile https://..." class="w-full bg-black border border-white/10 rounded-lg p-2 text-sm" oninput="updateProfile()">
+      <div class="flex gap-4"><label class="text-xs">Accent <input id="pAccent" type="color" value="#0A84FF" oninput="updateProfile()"></label><label class="text-xs">Background <input id="pBg" type="color" value="#0A0A0A" oninput="updateProfile()"></label></div>
+    </div>
+  </div>
+
+  <!-- TAB ANALYTICS -->
+  <div id="content-Analytics" class="tab-content hidden space-y-3">
+    <div class="grid grid-cols-3 gap-3">
+      <div class="bg-[#111] p-4 rounded-xl border border-white/10"><p class="text-[10px] text-gray-400">Total Views</p><p id="statViews" class="text-xl font-bold">0</p></div>
+      <div class="bg-[#111] p-4 rounded-xl border border-white/10"><p class="text-[10px] text-gray-400">Total Clicks</p><p id="statClicks" class="text-xl font-bold">0</p></div>
+      <div class="bg-[#111] p-4 rounded-xl border border-white/10"><p class="text-[10px] text-gray-400">CTR</p><p id="statCtr" class="text-xl font-bold">0%</p></div>
+    </div>
+    <div class="bg-[#111] p-4 rounded-xl border border-white/10"><p class="text-sm font-bold mb-2">Top Links</p><div id="topLinks"></div></div>
+  </div>
+
+  <!-- TAB THEMES -->
+  <div id="content-Themes" class="tab-content hidden grid grid-cols-2 md:grid-cols-3 gap-3">
+    <button onclick="setTheme('#0A0A0A','#0A84FF')" class="h-20 rounded-xl border border-white/10 bg-[#0A0A0A]"><span class="text-xs text-[#0A84FF]">Dark Blue</span></button>
+    <button onclick="setTheme('#FFFFFF','#000000')" class="h-20 rounded-xl border border-white/10 bg-white"><span class="text-xs text-black">Light</span></button>
+    <button onclick="setTheme('#001a33','#00D4FF')" class="h-20 rounded-xl border border-white/10 bg-[#001a33]"><span class="text-xs text-[#00D4FF]">Ocean</span></button>
+    <button onclick="setTheme('#1a0a33','#8A2BE2')" class="h-20 rounded-xl border border-white/10 bg-[#1a0a33]"><span class="text-xs text-[#8A2BE2]">Purple</span></button>
+    <button onclick="setTheme('#331100','#FF6B00')" class="h-20 rounded-xl border border-white/10 bg-[#331100]"><span class="text-xs text-[#FF6B00]">Sunset</span></button>
+    <button onclick="setTheme('#0a1f0a','#00FF88')" class="h-20 rounded-xl border border-white/10 bg-[#0a1f0a]"><span class="text-xs text-[#00FF88]">Forest</span></button>
+  </div>
+
+  <!-- TAB SHARE -->
+  <div id="content-Share" class="tab-content hidden">
+    <div class="bg-[#111] p-6 rounded-xl border border-white/10 text-center">
+      <p class="text-sm mb-2">Public Link:</p>
+      <p id="publicUrl" class="bg-black p-2 rounded-lg text-[#0A84FF] text-xs break-all"></p>
+      <img id="qrImg" class="mt-4 mx-auto bg-white p-2 rounded-xl" width="150" height="150">
+      <button onclick="copyLink()" class="mt-4 bg-white text-black px-4 py-2 rounded-full text-xs font-bold">Copy Link</button>
+      <button onclick="exportData()" class="mt-2 bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs">Export Backup JSON</button>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW KANAN -->
+<div class="w-full md:w-[42%] bg-[#050505] p-6 md:p-8 flex justify-center items-start md:h-screen overflow-y-auto">
+  <div id="previewBox" class="w-[360px] min-h-[680px] rounded-[38px] border-[8px] border-[#222] p-6" style="background:#0A0A0A">
+    <div class="text-center">
+      <img id="previewAvatar" src="https://i.pravatar.cc/150" class="w-20 h-20 rounded-full mx-auto border-2 border-[#0A84FF] object-cover">
+      <h2 id="previewName" class="font-bold mt-3 text-lg">Alex Morgan</h2>
+      <p id="previewBio" class="text-xs text-gray-400">@alexdesign • Designer & Creator</p>
+    </div>
+    <div id="previewLinks" class="mt-6 space-y-3"></div>
+    <p class="text-[9px] text-center text-gray-600 mt-8">Powered by LinkThree FREE • No Premium • 100% Logic</p>
+  </div>
+</div>
+
+<script>
+let links = [{id:"1",title:"Follow on Instagram",url:"https://instagram.com",active:true,clicks:712,icon:"📸"},{id:"2",title:"YouTube",url:"https://youtube.com",active:true,clicks:420,icon:"▶️"},{id:"3",title:"My Portfolio",url:"https://myporto.com",active:true,clicks:312,icon:"💼"}];
+let profile = {name:"Alex Morgan",bio:"@alexdesign • Designer & Creator",avatar:"https://i.pravatar.cc/150",accent:"#0A84FF",bg:"#0A0A0A"};
+let views = 12400;
+
+function load(){
+  const s=localStorage.getItem("linkthree_all_in_one");
+  if(s){const d=JSON.parse(s); links=d.links||links; profile=d.profile||profile; views=d.views||views;}
+  views++;
+  document.getElementById('pName').value=profile.name;
+  document.getElementById('pBio').value=profile.bio;
+  document.getElementById('pAvatar').value=profile.avatar;
+  document.getElementById('pAccent').value=profile.accent;
+  document.getElementById('pBg').value=profile.bg;
+  render();
+}
+function save(){localStorage.setItem("linkthree_all_in_one",JSON.stringify({links,profile,views}));}
+
+function switchTab(t){
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.add('hidden'));
+  document.getElementById('content-'+t).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.className="tab-btn bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs";});
+  document.getElementById('tab-'+t).className="tab-btn bg-[#0A84FF] text-black px-4 py-2 rounded-full text-xs font-bold";
+}
+function addLink(){
+  const title=document.getElementById('newTitle').value.trim();
+  const url=document.getElementById('newUrl').value.trim();
+  if(!title||!url){alert("Isi title & url!");return;}
+  links.push({id:Date.now().toString(),title,url,active:true,clicks:0,icon:"🔗"});
+  document.getElementById('newTitle').value=""; document.getElementById('newUrl').value="";
+  render();
+}
+function toggleLink(id){links=links.map(l=>l.id===id?{...l,active:!l.active}:l);render();}
+function deleteLink(id){if(confirm("Hapus link?")){links=links.filter(l=>l.id!==id);render();}}
+function clickLink(id){links=links.map(l=>l.id===id?{...l,clicks:l.clicks+1}:l);render();}
+function updateProfile(){
+  profile.name=document.getElementById('pName').value||"Alex Morgan";
+  profile.bio=document.getElementById('pBio').value||"";
+  profile.avatar=document.getElementById('pAvatar').value||"https://i.pravatar.cc/150";
+  profile.accent=document.getElementById('pAccent').value;
+  profile.bg=document.getElementById('pBg').value;
+  render();
+}
+function setTheme(bg,accent){profile.bg=bg;profile.accent=accent;document.getElementById('pBg').value=bg;document.getElementById('pAccent').value=accent;render();}
+
+function render(){
+  save();
+  // editor list
+  document.getElementById('linksList').innerHTML=links.map(l=>`
+    <div class="bg-[#1A1A1A] p-3 rounded-xl border border-white/10 flex justify-between items-center">
+      <div><p class="font-bold text-sm">${l.icon} ${l.title}</p><p class="text-[11px] text-gray-400">${l.url} • ${l.clicks} clicks</p></div>
+      <div class="flex items-center gap-2">
+        <button onclick="toggleLink('${l.id}')" class="w-12 h-7 rounded-full p-1 ${l.active?'bg-[#0A84FF]':'bg-gray-600'}"><div class="w-5 h-5 bg-white rounded-full transition ${l.active?'translate-x-5':''}"></div></button>
+        <button onclick="deleteLink('${l.id}')" class="text-red-400 text-xs">Hapus</button>
+      </div>
+    </div>`).join("");
+
+  // preview
+  document.getElementById('previewBox').style.background=profile.bg;
+  document.getElementById('previewAvatar').src=profile.avatar;
+  document.getElementById('previewAvatar').style.borderColor=profile.accent;
+  document.getElementById('previewName').innerText=profile.name;
+  document.getElementById('previewName').style.color=profile.bg==="#FFFFFF"?"black":"white";
+  document.getElementById('previewBio').innerText=profile.bio;
+  document.getElementById('previewLinks').innerHTML=links.filter(l=>l.active).map(l=>`
+    <a href="${l.url}" target="_blank" onclick="clickLink('${l.id}')" class="block w-full p-4 rounded-xl text-center font-bold border-2 hover:scale-[1.02] transition" style="background:${profile.bg==='#FFFFFF'?'#f5f5f5':'#1A1A1A'};border-color:${profile.accent};color:${profile.bg==='#FFFFFF'?'black':'white'}">${l.icon} ${l.title}</a>
+  `).join("") || '<p class="text-center text-xs text-gray-500">Belum ada link aktif</p>';
+
+  // analytics
+  const total=links.reduce((a,b)=>a+b.clicks,0);
+  document.getElementById('statViews').innerText=views.toLocaleString();
+  document.getElementById('statClicks').innerText=total;
+  document.getElementById('statCtr').innerText=((total/views)*100).toFixed(1)+"%";
+  document.getElementById('topLinks').innerHTML=links.slice().sort((a,b)=>b.clicks-a.clicks).slice(0,3).map(l=>`<p class="text-xs py-1">${l.title} - ${l.clicks} clicks (${total?((l.clicks/total)*100).toFixed(0):0}%)</p>`).join("");
+
+  // share
+  const url=window.location.href.split('?')[0]+"@"+profile.name.replace(/\s/g,"");
+  document.getElementById('publicUrl').innerText=url;
+  document.getElementById('qrImg').src=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}&bgcolor=${profile.bg.replace('#','')}&color=${profile.accent.replace('#','')}`;
+}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('publicUrl').innerText);alert("Link tercopy!");}
+function exportData(){const blob=new Blob([JSON.stringify({links,profile,views},null,2)],{type:"application/json"});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="linkthree-backup.json";a.click();}
+
+load();
+</script>
+</body>
+  </html>
